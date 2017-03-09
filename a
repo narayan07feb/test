@@ -1,0 +1,51 @@
+package com.optum.ogn.model;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.annotations.ApiModelProperty;
+
+public class WCPIdSet {
+
+	private String personId;
+	private String memberSSN;
+	private String subscriberID;
+	private String alternateId;
+	
+	@ApiModelProperty(value = "")
+	@JsonProperty("personId")
+	public String getPersonId() {
+		return personId;
+	}
+	public void setPersonId(String personId) {
+		this.personId = personId;
+	}
+	
+	@ApiModelProperty(value = "")
+	@JsonProperty("memberSSN")
+	public String getMemberSSN() {
+		return memberSSN;
+	}
+	public void setMemberSSN(String memberSSN) {
+		this.memberSSN = memberSSN;
+	}
+	
+	@ApiModelProperty(value = "")
+	@JsonProperty("subscriberID")
+	public String getSubscriberID() {
+		return subscriberID;
+	}
+	public void setSubscriberID(String subscriberID) {
+		this.subscriberID = subscriberID;
+	}
+	
+	@ApiModelProperty(value = "")
+	@JsonProperty("alternateId")
+	public String getAlternateId() {
+		return alternateId;
+	}
+	public void setAlternateId(String alternateId) {
+		this.alternateId = alternateId;
+	}
+	
+	
+}
