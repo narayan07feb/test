@@ -1,0 +1,116 @@
+private StatusType checkIfValid(UpdateMemberStatus body) throws GlobalNavException {
+		
+		LOGGER.info(Thread.currentThread().getStackTrace()[1].getMethodName()+" :: START");
+		MessagesType mts=null;
+		StatusType st=null;
+		StringBuilder resBuffer=null;
+		if(AttributetobeUpdatedEnum.MemberStatus.toString().equalsIgnoreCase(body.getAttributetobeUpdated().toString())){
+			if(body.getHealthsafeid()==null){
+				resBuffer=new StringBuilder();
+				resBuffer.append("\n Healthsafe id is mandatory for member status update");
+				if(mts==null)
+					mts=new MessagesType();
+				MessageType mt=new MessageType();
+				mt.setCode("400");
+				mt.setSeverity(Constants.Severity.FAULT.name());
+				mt.setName(Constants.StatusMsgNm.CONDITIONAL_VIOLATON.name());
+				mt.setDescription(resBuffer.toString());
+				mts.getMessage().add(mt);
+			}
+			else if(body.getStatus()==null){
+				resBuffer=new StringBuilder();
+				resBuffer.append("\n Status is mandatory for member status update");
+				if(mts==null)
+					mts=new MessagesType();
+				MessageType mt=new MessageType();
+				mt.setCode("400");
+				mt.setSeverity(Constants.Severity.FAULT.name());
+				mt.setName(Constants.StatusMsgNm.CONDITIONAL_VIOLATON.name());
+				mt.setDescription(resBuffer.toString());
+				mts.getMessage().add(mt);
+			}
+		}
+		else if(AttributetobeUpdatedEnum.MemberPortalEligibilityFailDt.toString().equalsIgnoreCase(body.getAttributetobeUpdated().toString())){
+			if(body.getProvisionMemberId()==null){
+				resBuffer=new StringBuilder();
+				resBuffer.append("\n ProvisionMember id is mandatory for Eligibility Fail Date update");
+				if(mts==null)
+					mts=new MessagesType();
+				MessageType mt=new MessageType();
+				mt.setCode("400");
+				mt.setSeverity(Constants.Severity.FAULT.name());
+				mt.setName(Constants.StatusMsgNm.CONDITIONAL_VIOLATON.name());
+				mt.setDescription(resBuffer.toString());
+				mts.getMessage().add(mt);
+			}
+			else if(!DatatobeUpdatedEnum.Eligibility.toString().equalsIgnoreCase(body.getDatatobeUpdated().toString())){
+				resBuffer=new StringBuilder();
+				resBuffer.append("\n DataTobeUpdated should be Eligibility for MemberPortalEligibilityFailDt update");
+				if(mts==null)
+					mts=new MessagesType();
+				MessageType mt=new MessageType();
+				mt.setCode("400");
+				mt.setSeverity(Constants.Severity.FAULT.name());
+				mt.setName(Constants.StatusMsgNm.CONDITIONAL_VIOLATON.name());
+				mt.setDescription(resBuffer.toString());
+				mts.getMessage().add(mt);
+			}
+			else if(body.getPortalShortNmList()==null){
+				resBuffer=new StringBuilder();
+				resBuffer.append("\nPortal Short Name List cannot be null for MemberPortalEligibilityFailDt update ");
+				if(mts==null)
+					mts=new MessagesType();
+				MessageType mt=new MessageType();
+				mt.setCode("400");
+				mt.setSeverity(Constants.Severity.FAULT.name());
+				mt.setName(Constants.StatusMsgNm.CONDITIONAL_VIOLATON.name());
+				mt.setDescription(resBuffer.toString());
+				mts.getMessage().add(mt);
+			}
+			/*else if(body.getEligibilityFailDate()==null){
+				resBuffer=new StringBuilder();
+				resBuffer.append("\n EligibilityFailDt is mandatory for Eligibility Fail Date update");
+				if(mts==null)
+					mts=new MessagesType();
+				MessageType mt=new MessageType();
+				mt.setCode("400");
+				mt.setSeverity(Constants.Severity.FAULT.name());
+				mt.setName(Constants.StatusMsgNm.CONDITIONAL_VIOLATON.name());
+				mt.setDescription(resBuffer.toString());
+				mts.getMessage().add(mt);
+			}*/
+		}else if(AttributetobeUpdatedEnum.RegistrationType.toString().equalsIgnoreCase(body.getAttributetobeUpdated().toString())){
+			if(body.getHealthsafeid()==null){
+				resBuffer=new StringBuilder();
+				resBuffer.append("\n Healthsafe id is mandatory for member status update");
+				if(mts==null)
+					mts=new MessagesType();
+				MessageType mt=new MessageType();
+				mt.setCode("400");
+				mt.setSeverity(Constants.Severity.FAULT.name());
+				mt.setName(Constants.StatusMsgNm.CONDITIONAL_VIOLATON.name());
+				mt.setDescription(resBuffer.toString());
+				mts.getMessage().add(mt);
+			}
+			else if(!DatatobeUpdatedEnum.Member.toString().equalsIgnoreCase(body.getDatatobeUpdated().toString())){
+				resBuffer=new StringBuilder();
+				resBuffer.append("\n DataTobeUpdated should be Member for update");
+				if(mts==null)
+					mts=new MessagesType();
+				MessageType mt=new MessageType();
+				mt.setCode("400");
+				mt.setSeverity(Constants.Severity.FAULT.name());
+				mt.setName(Constants.StatusMsgNm.CONDITIONAL_VIOLATON.name());
+				mt.setDescription(resBuffer.toString());
+				mts.getMessage().add(mt);
+			}
+		}
+		if(mts!=null){
+			if(st==null)
+				st=new StatusType();
+			st.setMessages(mts);
+		}
+		LOGGER.info(Thread.currentThread().getStackTrace()[1].getMethodName()+" :: END");
+		return st;
+				
+	}
